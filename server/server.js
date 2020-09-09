@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const pg = require("pg"); // this is what lets us talk to db
+const { json } = require("express");
 
 // uses
 app.use(express.static("server/public"));
@@ -12,9 +13,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const port = 3000;
 
 // db setup
-const Pool = pg.Pool;
+const Pool = pg.Pool; //pg.Pool is not tacos
 // configure the connection to db
 const pool = new Pool({
+  //Pool is not tacos
   database: "music_library", // db name (NOT table name)
   host: "localhost", // deafult when running locally, will change when deploying
   port: 5432, // default port for local, also will change when deployed
@@ -42,6 +44,25 @@ app.get("/songs", (req, res) => {
       res.sendStatus(500);
     }); // end query
 }); // end /songs GET
+
+// Get a single song
+/// Endpoint: GET/ songs/:id
+app.get("/songs/:id", (req, res) => {
+  console.log("sog ID to retrieve", req.params.id);
+  // Grab song ID from URL params
+  let songId = req.params.id;
+
+  const queryString = `SELECT * FROM "songs" WHERE "id" = $1;`;
+  pool
+    .query(queryString, [songId])
+    .then((results) => {
+      res.send(results.rows);
+    })
+    .catch((err) => {
+      console.error("error!!!"), err;
+      res.sendStatus(500);
+    });
+});
 
 app.post("/songs", (req, res) => {
   console.log("in /songs POST:", req.body);

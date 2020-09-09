@@ -12,10 +12,13 @@ function deleteSong() {
   let songId = $(this).data("id"); // ToDo
   $.ajax({
     method: "DELETE",
-    url: `/songs/${songID}`,
+    url: `/songs/${songId}`,
   })
     .then(function (response) {
       console.log("Deleted!", response);
+
+      // TODO: // Refresh page (aka do another GET request)
+      getSongs();
     })
     .catch(function (err) {
       console.log("Error in delete", err);
