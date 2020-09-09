@@ -1,0 +1,14 @@
+HTTP-      ENGLISH                SQL
+------    ---------              ----------
+
+GET     Get a list of songs      --SELECT
+POST     Create a new songs     -- INSERT
+DELETE    Remove a songs       -- DELETE
+PUT      Modify an existing songs  --UPDATE
+
+CRUD --aka
+
+Create
+Read
+Update 
+Delete
