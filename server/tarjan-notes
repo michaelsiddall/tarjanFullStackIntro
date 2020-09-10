@@ -12,3 +12,9 @@ Create
 Read
 Update 
 Delete
+
+GET /monkeys            List monkeys
+GET /monkeys/:id        Get a monkey by id
+POST /monkeys           Create a monkey
+PUT /monkeys/:id        Update a moneky by id
+DELETE /monkeys/:id     Delete a monkey by id

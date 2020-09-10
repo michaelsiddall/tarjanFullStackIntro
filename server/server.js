@@ -48,7 +48,7 @@ app.get("/songs", (req, res) => {
 // Get a single song
 /// Endpoint: GET/ songs/:id
 app.get("/songs/:id", (req, res) => {
-  console.log("sog ID to retrieve", req.params.id);
+  console.log("song ID to retrieve", req.params.id);
   // Grab song ID from URL params
   let songId = req.params.id;
 
@@ -105,4 +105,9 @@ app.delete("/songs/:id", (req, res) => {
       console.log("Error deleted record", err);
       res.sendStatus(500);
     });
+});
+
+app.put("/songs/:id", (req, res) => {
+  console.log("params", req.params.id, req.body);
+  res.sendStatus(200); // send back "OK"
 });
